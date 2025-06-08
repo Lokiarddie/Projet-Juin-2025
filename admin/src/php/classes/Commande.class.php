@@ -1,6 +1,6 @@
 <?php
 
-class Admin
+class Commande
 {
     private $_attributs = array();
 
@@ -29,4 +29,3 @@ class Admin
     }
 
 }
-

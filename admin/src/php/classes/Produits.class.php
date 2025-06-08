@@ -1,6 +1,6 @@
 <?php
 
-class Admin
+class Produits
 {
     private $_attributs = array();
 
