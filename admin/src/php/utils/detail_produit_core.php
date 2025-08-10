@@ -7,8 +7,8 @@ if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
     exit;
 }
 
-$pdo = connectDB();
-$produitsDAO = new ProduitsDAO($pdo);
+
+$produitsDAO = new ProduitsDAO($cnx);
 
 $id = (int) $_GET['id'];
 $produit = $produitsDAO->getProduitById($id);

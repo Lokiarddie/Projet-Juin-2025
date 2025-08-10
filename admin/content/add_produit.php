@@ -1,10 +1,8 @@
 <?php
-require_once('src/php/db/db_pg_connect.php');
 require_once('src/php/classes/ProduitsDAO.class.php');
 require ('src/php/utils/check_connection.php');
 
-$pdo = connectDB();
-$produitsDAO = new ProduitsDAO($pdo);
+$produitsDAO = new ProduitsDAO($cnx);
 
 $error = '';
 $success = '';
@@ -49,7 +47,7 @@ if (isset($_POST['type_submit']) || isset($_POST['add_produit_submit'])) {
         $image = null;
         if (!empty($_FILES['image']['name'])) {
             $filename = basename($_FILES['image']['name']);
-            $target_dir = __DIR__ . '/../../../assets/images/';  // adapte selon ta structure
+            $target_dir = __DIR__ . '/../../../assets/images/';
             $target_file = $target_dir . $filename;
 
             if (move_uploaded_file($_FILES['image']['tmp_name'], $target_file)) {

@@ -2,8 +2,8 @@
 require_once(__DIR__.'/../admin/src/php/db/db_pg_connect.php');
 require_once(__DIR__.'/../admin/src/php/classes/ProduitsDAO.class.php');
 
-$pdo = connectDB();
-$produitsDAO = new ProduitsDAO($pdo);
+
+$produitsDAO = new ProduitsDAO($cnx);
 
 $plantes = $produitsDAO->getProduitsParCategorie('plante');
 ?>

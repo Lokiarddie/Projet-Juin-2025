@@ -1,10 +1,8 @@
 <?php
-require_once('src/php/db/db_pg_connect.php');
 require_once('src/php/classes/ProduitsDAO.class.php');
 require ('src/php/utils/check_connection.php'); // pour s'assurer que l'admin est connecté
 
-$pdo = connectDB();
-$produitsDAO = new ProduitsDAO($pdo);
+$produitsDAO = new ProduitsDAO($cnx);
 
 // Récupérer tous les produits
 $produits = $produitsDAO->getAllProduits();

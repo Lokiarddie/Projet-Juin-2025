@@ -17,7 +17,7 @@ include('src/php/utils/detail_produit_core.php');
 <script src="../assets/js/fonctionsJqueryUI.js"></script>
 
 <script>
-    // Passer l'id du produit à ton script JS
+    // Passer l'id du produit à script JS
     const produitId = <?= json_encode($produit['id']) ?>;
 </script>
 

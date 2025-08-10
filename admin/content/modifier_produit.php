@@ -1,5 +1,5 @@
 <?php
-require_once('src/php/db/db_pg_connect.php');
+
 require_once('src/php/classes/ProduitsDAO.class.php');
 
 // Vérifier que l'ID est bien passé
@@ -8,8 +8,7 @@ if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
     exit;
 }
 
-$pdo = connectDB();
-$produitsDAO = new ProduitsDAO($pdo);
+$produitsDAO = new ProduitsDAO($cnx);
 $id = (int) $_GET['id'];
 
 // Récupération du produit

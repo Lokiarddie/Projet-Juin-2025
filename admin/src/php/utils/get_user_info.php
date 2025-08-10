@@ -8,7 +8,7 @@ if (!isset($_SESSION['user']['id'])) {
     exit;
 }
 
-$pdo = connectDB();
-$userDAO = new UserDAO($pdo);
+
+$userDAO = new UserDAO($cnx);
 $user = $userDAO->getUserById($_SESSION['user']['id']);
 

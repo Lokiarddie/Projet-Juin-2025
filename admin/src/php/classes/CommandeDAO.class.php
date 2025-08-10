@@ -50,7 +50,7 @@ class CommandeDAO
             $this->_bd->commit();
             return true;
         } catch (Exception $e) {
-            $this->pdo->rollBack();
+            $this->_bd->rollBack();
             return false;
         }
     }

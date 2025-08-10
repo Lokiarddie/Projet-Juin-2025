@@ -6,8 +6,7 @@ require ('./admin/src/php/utils/check_connection.php');
 
 //print "<br>Bonjour ".$_SESSION['user']['nom']."<br>";
 
-$pdo = connectDB();
-$produitsDAO = new ProduitsDAO($pdo);
+$produitsDAO = new ProduitsDAO($cnx);
 
 // On récupère 4 produits aléatoires
 $produits = $produitsDAO->getProduitsAleatoires(4);

@@ -1,11 +1,9 @@
 <?php
 require ('src/php/utils/check_connection.php');
 
-require_once('src/php/db/db_pg_connect.php');
 require_once('src/php/classes/ProduitsDAO.class.php');
 
-$pdo = connectDB();
-$produitsDAO = new ProduitsDAO($pdo);
+$produitsDAO = new ProduitsDAO($cnx);
 
 // On récupère 4 produits aléatoires
 $produits = $produitsDAO->getProduitsAleatoires(4);

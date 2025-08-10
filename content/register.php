@@ -2,8 +2,8 @@
 require_once(__DIR__ . '/../admin/src/php/db/db_pg_connect.php');
 require_once(__DIR__ . '/../admin/src/php/classes/UserDAO.class.php');
 
-$pdo = connectDB();
-$userDAO = new UserDAO($pdo);
+
+$userDAO = new UserDAO($cnx);
 $error = '';
 $success = '';
 

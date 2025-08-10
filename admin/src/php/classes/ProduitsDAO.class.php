@@ -52,7 +52,7 @@ class ProduitsDAO {
             $stmt->bindValue(':quantite_stock', $quantite_stock, PDO::PARAM_INT);
             return $stmt->execute();
         } catch (PDOException $e) {
-            // Gérer l'erreur ici ou logger
+
             return false;
         }
     }
@@ -65,7 +65,7 @@ class ProduitsDAO {
             $categories = $stmt->fetchAll(PDO::FETCH_COLUMN);
             return $categories; // tableau de catégories (strings)
         } catch (PDOException $e) {
-            // Gestion d'erreur simple
+
             return [];
         }
     }

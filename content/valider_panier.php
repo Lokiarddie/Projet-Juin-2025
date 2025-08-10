@@ -7,8 +7,8 @@ if (!isset($_SESSION['user'])) {
     exit;
 }
 
-$pdo = connectDB();
-$commandeDAO = new CommandeDAO($pdo);
+
+$commandeDAO = new CommandeDAO($cnx);
 $clientId = (int)$_SESSION['user']['id'];
 $panier = $_SESSION['panier'] ?? [];
 

@@ -4,10 +4,10 @@ require_once(__DIR__ . '/../admin/src/php/db/db_pg_connect.php');
 require_once(__DIR__ . '/../admin/src/php/classes/CommandeDAO.class.php');
 require_once(__DIR__ . '/../admin/src/php/classes/UserDAO.class.php');
 
-$pdo = connectDB();
-$commandeDAO = new CommandeDAO($pdo);
+
+$commandeDAO = new CommandeDAO($cnx);
 $commandes = $commandeDAO->getCommandesByClientId((int)$user['id']);
-$userDAO = new UserDAO($pdo);
+$userDAO = new UserDAO($cnx);
 $userId = (int)$_SESSION['user']['id'];
 
 if (isset($_POST['delete_account'])) {

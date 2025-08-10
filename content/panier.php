@@ -2,8 +2,8 @@
 require_once('admin/src/php/db/db_pg_connect.php');
 require_once('admin/src/php/classes/ProduitsDAO.class.php');
 
-$pdo = connectDB();
-$dao = new ProduitsDAO($pdo);
+
+$dao = new ProduitsDAO($cnx);
 
 $panier = $_SESSION['panier'] ?? [];
 

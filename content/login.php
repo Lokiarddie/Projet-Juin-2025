@@ -1,11 +1,11 @@
 <?php
-$pdo = connectDB();  // IMPORTANT : définir $pdo AVANT tout usage
+ // IMPORTANT : définir $pdo AVANT tout usage
 // Traitement si le formulaire est soumis
 if (isset($_POST['login_submit'])) {
     extract($_POST, EXTR_OVERWRITE);
 
     // Vérifie d'abord côté admin
-    $admDAO = new AdminDAO($pdo);
+    $admDAO = new AdminDAO($cnx);
     $admin = $admDAO->getAdmin($login, $password);
     if ($admin) {
         $_SESSION['admin'] = $admin;
@@ -14,7 +14,7 @@ if (isset($_POST['login_submit'])) {
     }
 
     // Sinon, on essaie côté client
-    $userDAO = new UserDAO($pdo);
+    $userDAO = new UserDAO($cnx);
     $user = $userDAO->getUser($login, $password);
     if ($user) {
         $_SESSION['user'] = $user;
