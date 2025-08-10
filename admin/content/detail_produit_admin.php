@@ -1,6 +1,6 @@
 <?php
 
-include('src/php/utils/detail_produit_core.php');
+require('src/php/utils/detail_produit_core.php');
 
 ?>
 <button id="delete-btn" class="btn btn-danger mt-3">

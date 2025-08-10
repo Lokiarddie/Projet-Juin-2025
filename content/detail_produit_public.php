@@ -1,5 +1,5 @@
 <?php
-include('admin/src/php/utils/detail_produit_core.php');
+require('admin/src/php/utils/detail_produit_core.php');
 ?>
 
 <form id="add-to-cart-form">
