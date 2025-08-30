@@ -1,33 +1,46 @@
+
 <?php
+header('Content-Type: application/json');
+error_reporting(E_ALL);
+ini_set('display_errors', 0);
+
 require_once('../db/db_pg_connect.php');
-require'../classes/Connection.class.php';
-require'../classes/Produits.class.php';
+require_once('../classes/Connection.class.php');
 require_once('../classes/ProduitsDAO.class.php');
+
 $cnx = Connection::getInstance($dsn, $username, $password);
+$dao = new ProduitsDAO($cnx);
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+$data = json_decode(file_get_contents('php://input'), true);
 
-    $dao = new ProduitsDAO($cnx);
-
-    $id = (int)$_POST['id'];
-    $nom = $_POST['nom'];
-    $type = $_POST['type'];
-    $categorie = $_POST['categorie'];
-    $prix = (float)$_POST['prix'];
-    $quantite = (int)$_POST['quantite_stock'];
-    $description = $_POST['description'];
-
-    $image = null;
-    if (!empty($_FILES['image']['name'])) {
-        $filename = basename($_FILES['image']['name']);
-        move_uploaded_file($_FILES['image']['tmp_name'], __DIR__ . '/../../../assets/images/' . $filename);
-        $image = $filename;
-    }
-
-    $success = $dao->updateProduit($id, $nom, $type, $categorie, $prix, $quantite, $description, $image);
-
-    echo $success ? 'success' : 'fail';
+if (!$data || !isset($data['id'], $data['champ'], $data['valeur'])) {
+    echo json_encode(['success' => false, 'error' => 'Données manquantes']);
     exit;
 }
-echo 'invalid';
+
+$id = (int)$data['id'];
+$champ = $data['champ'];
+$valeur = $data['valeur'];
+
+// Conversion selon type
+if ($champ === 'prix') {
+    $valeur = str_replace(',', '.', $valeur); // convertir virgule en point
+    $valeur = floatval($valeur);
+} elseif ($champ === 'quantite_stock') {
+    $valeur = intval($valeur);
+} else {
+    $valeur = trim($valeur);
+}
+
+
+$result = $dao->update_ajax_produit($id, $champ, $valeur);
+
+if ($result === true) {
+    echo json_encode(['success' => true]);
+} else {
+    echo json_encode([
+        'success' => false,
+        'error' => is_string($result) ? $result : 'Erreur lors de la mise à jour'
+    ]);
+}
 

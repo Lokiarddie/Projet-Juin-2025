@@ -7,17 +7,14 @@ require('src/php/utils/detail_produit_core.php');
     🗑️ Supprimer
 </button>
 
-<a href="index_.php?page=modifier_produit.php&id=<?= $produit['id'] ?>" class="btn btn-warning mt-3">
-    ✏️ Modifier
-</a>
+<button id="edit-all-btn" type="button" class="btn btn-primary btn-sm">✏️ Modifier</button>
+<div id="update-message" class="mt-3 text-success fw-bold" style="display: none;"></div>
 
 <div id="delete-message" class="mt-3 text-success fw-bold" style="display: none;"></div>
 
-<!-- Inclure le script JS -->
-<script src="../assets/js/fonctionsJqueryUI.js"></script>
+<script src="/TI2/projet_juin/admin/assets/js/fonctionsJqueryUI.js"></script>
 
 <script>
-    // Passer l'id du produit à script JS
     const produitId = <?= json_encode($produit['id']) ?>;
 </script>
 

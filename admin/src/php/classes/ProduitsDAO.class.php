@@ -105,32 +105,34 @@ class ProduitsDAO {
         }
     }
 
-    public function updateProduit($id, $nom, $type, $categorie, $prix, $quantite, $description, $image = null) {
-        $sql = "UPDATE produits SET nom = :nom, type = :type, categorie = :categorie, prix = :prix,
-            quantite_stock = :quantite, description = :description";
+    public function update_ajax_produit($id, $champ, $valeur) {
+        $query = "SELECT update_produit_champ(:id, :champ, :valeur) AS success";
+        try {
+            $this->_bd->beginTransaction();
+            $stmt = $this->_bd->prepare($query);
 
-        if ($image !== null) {
-            $sql .= ", image = :image";
+            $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+            $stmt->bindValue(':champ', $champ, PDO::PARAM_STR);
+
+            // Déterminer le type pour PDO
+            if (in_array($champ, ['prix', 'quantite_stock'])) {
+                $stmt->bindValue(':valeur', $valeur, PDO::PARAM_STR); // numeric et integer en string pour la fonction PLpgSQL
+            } else {
+                $stmt->bindValue(':valeur', $valeur, PDO::PARAM_STR);
+            }
+
+            $stmt->execute();
+            $this->_bd->commit();
+
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            return isset($row['success']) && ($row['success'] === 't' || $row['success'] === true);
+        } catch (PDOException $e) {
+            $this->_bd->rollBack();
+            return $e->getMessage();
         }
-
-        $sql .= " WHERE id = :id";
-
-        $stmt = $this->_bd->prepare($sql);
-
-        $stmt->bindParam(':nom', $nom);
-        $stmt->bindParam(':type', $type);
-        $stmt->bindParam(':categorie', $categorie);
-        $stmt->bindParam(':prix', $prix);
-        $stmt->bindParam(':quantite', $quantite);
-        $stmt->bindParam(':description', $description);
-        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-
-        if ($image !== null) {
-            $stmt->bindParam(':image', $image);
-        }
-
-        return $stmt->execute();
     }
+
+
 
 
 

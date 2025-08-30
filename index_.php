@@ -15,7 +15,8 @@ define('BASE_PATH', __DIR__);
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/ui/1.14.1/jquery-ui.min.js" integrity="sha256-AlTido85uXPlSyyaZNsjJXeCs07eSv3r43kyCVc8ChI=" crossorigin="anonymous"></script>
-    <script src="./admin/assets/js/fonctionsJqueryUI.js"></script>
+    <script src="/TI2/projet_juin/admin/assets/js/fonctionsJqueryUI.js"></script>
+    <link rel="stylesheet" href="./admin/assets/css/style.css">
 </head>
 
 <body>

@@ -1,0 +1,11 @@
+.editable {
+    display: inline-block;
+    min-width: 50px;
+    padding: 2px;
+    border-bottom: 1px dashed transparent;
+}
+
+.editable[contenteditable="true"] {
+    border-bottom-color: #007bff;
+    background-color: #f8f9fa;
+}
